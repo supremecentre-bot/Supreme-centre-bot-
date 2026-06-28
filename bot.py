@@ -1,0 +1,21 @@
+from telegram import Update
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+import os
+
+TOKEN = os.getenv("8732867356:AAFayPdp9soEry5bd9c8V1oqY3uPzpR39gk")
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Бот работает 🚀")
+
+def main():
+    if not TOKEN:
+        raise ValueError("BOT_TOKEN не найден в переменных окружения")
+
+    app = ApplicationBuilder().token(TOKEN).build()
+
+    app.add_handler(CommandHandler("start", start))
+
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()
